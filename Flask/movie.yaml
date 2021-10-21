@@ -1,0 +1,218 @@
+---
+openapi: 3.0.0
+info:
+  title: Movie API
+  description: This is the API of the Movie service
+  contact:
+    email: lecolazet.aymeric@imt-atlantique.net
+  license:
+    name: GPL v3
+    url: https://www.gnu.org/licenses/gpl-3.0.en.html
+  version: 1.0.0
+servers:
+- url: https://virtserver.swaggerhub.com/UE-archi-distribuees/Movie/1.0.0
+  description: SwaggerHub API Auto Mocking
+tags:
+- name: admins
+  description: Secured Admin-only calls
+- name: developers
+  description: Operations available to regular developers
+paths:
+  /:
+    get:
+      tags:
+      - developers
+      summary: home page of the service
+      description: |
+        Nothing to do
+      operationId: home
+      responses:
+        "200":
+          description: welcome message
+          content:
+            text/html:
+              schema:
+                type: string
+                example: <h1>Test</h1>
+  /movies:
+    get:
+      tags:
+      - developers
+      summary: get the full JSON database
+      description: |
+        Nothing to do
+      operationId: get_json
+      responses:
+        "200":
+          description: full JSON
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MovieID'
+  /movies/{movieid}:
+    get:
+      tags:
+      - developers
+      summary: get the movie by its id
+      description: |
+        By passing in the appropriate options, you can get info of a Movie
+      operationId: get_movie_byid
+      parameters:
+      - name: movieid
+        in: path
+        description: Movie ID.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          maximum: 1
+          minimum: 1
+          type: string
+      responses:
+        "200":
+          description: Movie description
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MovieItem'
+        "400":
+          description: bad input parameter
+    post:
+      tags:
+      - admins
+      summary: add a movie item
+      description: Adds a movie to the system
+      operationId: create_movie
+      parameters:
+      - name: movieid
+        in: path
+        description: Movie ID.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          maximum: 1
+          minimum: 1
+          type: string
+      requestBody:
+        description: Inventory item to add
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MovieItem'
+      responses:
+        "200":
+          description: Movie created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MovieItem'
+        "409":
+          description: an existing item already exists
+    put:
+      tags:
+        - admins
+      summary: modify a movie item
+      description: Modifies a movie to the system
+      operationId: update_movie
+      parameters:
+        - name: movieid
+          in: path
+          description: Movie ID.
+          required: true
+          style: simple
+          explode: false
+          schema:
+            maximum: 1
+            minimum: 1
+            type: string
+      requestBody:
+        description: Inventory item to modify
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MovieItem'
+      responses:
+        "200":
+          description: Movie modified
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MovieItem'
+        "409":
+          description: the movie doesn't exist
+    delete:
+      tags:
+      - admins
+      summary: delete a movie item
+      description: Deletes a movie to the system
+      operationId: del_movie
+      parameters:
+      - name: movieid
+        in: path
+        description: Movie ID.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          maximum: 1
+          minimum: 1
+          type: string
+      responses:
+        "200":
+          description: message item deleted
+        "400":
+          description: ID not found
+  /movietitle/{title}:
+    get:
+      tags:
+      - developers
+      summary: get the movie by its title
+      description: |
+        By passing in the appropriate options, you can get Movie info
+      operationId: get_movie_bytitle
+      parameters:
+      - name: title
+        in: path
+        description: pass a title
+        required: true
+        style: simple
+        explode: true
+        schema:
+          maximum: 1
+          minimum: 1
+          type: string
+      responses:
+        "200":
+          description: Movie item
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MovieItem'
+        "400":
+          description: bad input parameter
+components:
+  schemas:
+    MovieID:
+      required:
+      - id
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/MovieItem'
+    MovieItem:
+      required:
+      - director
+      - rating
+      - title
+      type: object
+      properties:
+        title:
+          type: string
+          example: The Martian
+        rating:
+          type: string
+          example: "7"
+        director:
+          type: string
+          example: Paul McGuigan
