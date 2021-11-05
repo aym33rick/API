@@ -4,6 +4,7 @@ service Movie {
   rpc GetListMovies(Empty) returns (stream MovieData) {}
   rpc DeleteMovieByID(MovieID) returns (Empty) {}
   rpc PostMovie(MovieData) returns (Empty) {}
+  rpc PutMovieByID(MovieData) returns (Empty) {}
 }
 message MovieID {
   string id = 1;

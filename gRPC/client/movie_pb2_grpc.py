@@ -34,6 +34,11 @@ class MovieStub(object):
                 request_serializer=movie__pb2.MovieData.SerializeToString,
                 response_deserializer=movie__pb2.Empty.FromString,
                 )
+        self.PutMovieByID = channel.unary_unary(
+                '/Movie/PutMovieByID',
+                request_serializer=movie__pb2.MovieData.SerializeToString,
+                response_deserializer=movie__pb2.Empty.FromString,
+                )
 
 
 class MovieServicer(object):
@@ -63,6 +68,12 @@ class MovieServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def PutMovieByID(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_MovieServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -83,6 +94,11 @@ def add_MovieServicer_to_server(servicer, server):
             ),
             'PostMovie': grpc.unary_unary_rpc_method_handler(
                     servicer.PostMovie,
+                    request_deserializer=movie__pb2.MovieData.FromString,
+                    response_serializer=movie__pb2.Empty.SerializeToString,
+            ),
+            'PutMovieByID': grpc.unary_unary_rpc_method_handler(
+                    servicer.PutMovieByID,
                     request_deserializer=movie__pb2.MovieData.FromString,
                     response_serializer=movie__pb2.Empty.SerializeToString,
             ),
@@ -159,6 +175,23 @@ class Movie(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/Movie/PostMovie',
+            movie__pb2.MovieData.SerializeToString,
+            movie__pb2.Empty.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def PutMovieByID(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/Movie/PutMovieByID',
             movie__pb2.MovieData.SerializeToString,
             movie__pb2.Empty.FromString,
             options, channel_credentials,
