@@ -41,8 +41,8 @@ def get_booked_movies_of_user(userid):
           if str(movie['id']) == str(date['movies'][0]):
             #ajouter les infos du movie dans le booking
             print('ok')
-    res = make_response(jsonify(booking),200)
-    return make_response(res, 200)
+      res = make_response(jsonify(booking),200)
+      return make_response(res, 200)
   return make_response(jsonify({"error":"booking ID not found"}),400)
 
 if __name__ == "__main__":

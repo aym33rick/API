@@ -8,6 +8,11 @@ service Movie {
 message MovieID {
   string id = 1;
 }
+
+message MovieTitle {
+    string title = 1;
+}
+
 message MovieData {
   string title = 1;
   float rating = 2;

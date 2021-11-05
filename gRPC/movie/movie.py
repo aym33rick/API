@@ -16,6 +16,16 @@ class MovieServicer(movie_pb2_grpc.MovieServicer):
                 return movie_pb2.MovieData(title=movie['title'], rating=movie['rating'], director=movie['director'], id=movie['id'])
         return movie_pb2.MovieData(title="", rating="", director="", id="")
 
+    def GetMovieByTitle(self, request, context):
+        for movie in self.db:
+            if movie['title'] == request.title:
+                print("Movie found !")
+                return movie_pb2.MovieData(title=movie['title'],
+                                       rating=movie['rating'],
+                                       director=movie['director'],
+                                       id=movie['id'])
+        return movie_pb2.MovieData(title="", rating="", director="", id="")
+
     def GetListMovies(self, request, context):
         for movie in self.db:
             yield movie_pb2.MovieData(title=movie['title'], rating=movie['rating'],director=movie['director'], id=movie['id'])
@@ -36,6 +46,18 @@ class MovieServicer(movie_pb2_grpc.MovieServicer):
         self.db.append(movie_pb2.MovieData(title=request.title, rating=request.rating,director=request.director, id=request.id))
         print("Movie added!")
         return movie_pb2.Empty()
+
+    # A REVOIR
+    def PutMovieByID(self, request, context):
+        for movie in self.db:
+            if movie['id'] == request.id:
+                print("Movie found !")
+                movie = request
+                return movie_pb2.MovieData(title=request['title'],
+                                       rating=request['rating'],
+                                       director=request['director'],
+                                       id=movie['id'])
+        return movie_pb2.MovieData(title="", rating="", director="", id="")
 
 
 def serve():
