@@ -20,10 +20,7 @@ class MovieServicer(movie_pb2_grpc.MovieServicer):
         for movie in self.db:
             if movie['title'] == request.title:
                 print("Movie found !")
-                return movie_pb2.MovieData(title=movie['title'],
-                                       rating=movie['rating'],
-                                       director=movie['director'],
-                                       id=movie['id'])
+                return movie_pb2.MovieData(title=movie['title'], rating=movie['rating'], director=movie['director'], id=movie['id'])
         return movie_pb2.MovieData(title="", rating="", director="", id="")
 
     def GetListMovies(self, request, context):

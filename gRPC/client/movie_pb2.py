@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\x0bmovie.proto\"\x15\n\x07MovieID\x12\n\n\x02id\x18\x01 \x01(\t\"\x1b\n\nMovieTitle\x12\r\n\x05title\x18\x01 \x01(\t\"H\n\tMovieData\x12\r\n\x05title\x18\x01 \x01(\t\x12\x0e\n\x06rating\x18\x02 \x01(\x02\x12\x10\n\x08\x64irector\x18\x03 \x01(\t\x12\n\n\x02id\x18\x04 \x01(\t\"\x07\n\x05\x45mpty2\xc8\x01\n\x05Movie\x12&\n\x0cGetMovieByID\x12\x08.MovieID\x1a\n.MovieData\"\x00\x12\'\n\rGetListMovies\x12\x06.Empty\x1a\n.MovieData\"\x00\x30\x01\x12%\n\x0f\x44\x65leteMovieByID\x12\x08.MovieID\x1a\x06.Empty\"\x00\x12!\n\tPostMovie\x12\n.MovieData\x1a\x06.Empty\"\x00\x12$\n\x0cPutMovieByID\x12\n.MovieData\x1a\x06.Empty\"\x00\x62\x06proto3'
+  serialized_pb=b'\n\x0bmovie.proto\"\x15\n\x07MovieID\x12\n\n\x02id\x18\x01 \x01(\t\"\x1b\n\nMovieTitle\x12\r\n\x05title\x18\x01 \x01(\t\"H\n\tMovieData\x12\r\n\x05title\x18\x01 \x01(\t\x12\x0e\n\x06rating\x18\x02 \x01(\x02\x12\x10\n\x08\x64irector\x18\x03 \x01(\t\x12\n\n\x02id\x18\x04 \x01(\t\"\x07\n\x05\x45mpty2\xf6\x01\n\x05Movie\x12&\n\x0cGetMovieByID\x12\x08.MovieID\x1a\n.MovieData\"\x00\x12,\n\x0fGetMovieByTitle\x12\x0b.MovieTitle\x1a\n.MovieData\"\x00\x12\'\n\rGetListMovies\x12\x06.Empty\x1a\n.MovieData\"\x00\x30\x01\x12%\n\x0f\x44\x65leteMovieByID\x12\x08.MovieID\x1a\x06.Empty\"\x00\x12!\n\tPostMovie\x12\n.MovieData\x1a\x06.Empty\"\x00\x12$\n\x0cPutMovieByID\x12\n.MovieData\x1a\x06.Empty\"\x00\x62\x06proto3'
 )
 
 
@@ -210,7 +210,7 @@ _MOVIE = _descriptor.ServiceDescriptor(
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
   serialized_start=151,
-  serialized_end=351,
+  serialized_end=397,
   methods=[
   _descriptor.MethodDescriptor(
     name='GetMovieByID',
@@ -223,9 +223,19 @@ _MOVIE = _descriptor.ServiceDescriptor(
     create_key=_descriptor._internal_create_key,
   ),
   _descriptor.MethodDescriptor(
+    name='GetMovieByTitle',
+    full_name='Movie.GetMovieByTitle',
+    index=1,
+    containing_service=None,
+    input_type=_MOVIETITLE,
+    output_type=_MOVIEDATA,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
     name='GetListMovies',
     full_name='Movie.GetListMovies',
-    index=1,
+    index=2,
     containing_service=None,
     input_type=_EMPTY,
     output_type=_MOVIEDATA,
@@ -235,7 +245,7 @@ _MOVIE = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='DeleteMovieByID',
     full_name='Movie.DeleteMovieByID',
-    index=2,
+    index=3,
     containing_service=None,
     input_type=_MOVIEID,
     output_type=_EMPTY,
@@ -245,7 +255,7 @@ _MOVIE = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='PostMovie',
     full_name='Movie.PostMovie',
-    index=3,
+    index=4,
     containing_service=None,
     input_type=_MOVIEDATA,
     output_type=_EMPTY,
@@ -255,7 +265,7 @@ _MOVIE = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='PutMovieByID',
     full_name='Movie.PutMovieByID',
-    index=4,
+    index=5,
     containing_service=None,
     input_type=_MOVIEDATA,
     output_type=_EMPTY,

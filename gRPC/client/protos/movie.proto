@@ -1,6 +1,7 @@
 syntax = "proto3";
 service Movie {
   rpc GetMovieByID(MovieID) returns (MovieData) {}
+  rpc GetMovieByTitle(MovieTitle) returns (MovieData) {}
   rpc GetListMovies(Empty) returns (stream MovieData) {}
   rpc DeleteMovieByID(MovieID) returns (Empty) {}
   rpc PostMovie(MovieData) returns (Empty) {}

@@ -37,9 +37,9 @@ def run():
       movieid = movie_pb2.MovieID(id = "a8034f44-aee4-44cf-b32c-74cf452aaaae")
       get_movie_by_id(stub, movieid)
 
-      # print("-------------- GetMovieByTitle --------------")
-      # movieTitle = movie_pb2.MovieTitle(title="Creed")
-      # get_movie_by_title(stub, movieTitle)
+      print("-------------- GetMovieByTitle --------------")
+      movieTitle = movie_pb2.MovieTitle(title="Creed")
+      get_movie_by_title(stub, movieTitle)
 
       print("-------------- GetListMovies --------------")
       get_list_movies(stub)
