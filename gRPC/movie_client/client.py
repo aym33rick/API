@@ -23,7 +23,6 @@ def post_movie(stub, movie_add):
     movie_added = stub.PostMovie(movie_add)
     print('Movie Added!')
 
-
 def put_movie(stub, movie_put):
     stub.PutMovieByID(movie_put)
     print('Movie Modified!')

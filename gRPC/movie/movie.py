@@ -34,7 +34,6 @@ class MovieServicer(movie_pb2_grpc.MovieServicer):
                 self.db.remove(movie)
         return movie_pb2.Empty()
 
-    #passe un movie et pas que l'id du con
     def PostMovie(self, request, context):
         for movie in self.db:
             if movie['id'] == request.id:
@@ -44,7 +43,6 @@ class MovieServicer(movie_pb2_grpc.MovieServicer):
         print("Movie added!")
         return movie_pb2.Empty()
 
-    # A REVOIR
     def PutMovieByID(self, request, context):
         for movie in self.db:
             if movie['id'] == request.id:
