@@ -36,13 +36,18 @@ def get_user_byid(userid):
 def get_booked_movies_of_user(userid):
   for booking in bookings:
     if str(booking["userid"]) == str(userid):
+      bookingTableau = {}
+      bookingTableau['userid'] = userid
+      bookingTableau['dates'] = []
       for date in booking["dates"]:
+        dateTableau = {}
+        dateTableau['date'] = date['date']
         for movie in movies:
           if str(movie['id']) == str(date['movies'][0]):
             #ajouter les infos du movie dans le booking
-            print('ok')
-      res = make_response(jsonify(booking),200)
-      return make_response(res, 200)
+            dateTableau['movies'] = movie
+        bookingTableau['dates'].append(dateTableau)
+      return make_response(jsonify(bookingTableau), 200)
   return make_response(jsonify({"error":"booking ID not found"}),400)
 
 if __name__ == "__main__":
