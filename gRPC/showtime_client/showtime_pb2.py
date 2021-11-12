@@ -19,10 +19,42 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\x0eshowtime.proto\",\n\x0cShowtimeData\x12\x0c\n\x04\x64\x61te\x18\x01 \x01(\t\x12\x0e\n\x06movies\x18\x02 \x03(\t\"\x07\n\x05\x45mpty29\n\x08Showtime\x12-\n\x10GetListShowtimes\x12\x06.Empty\x1a\r.ShowtimeData\"\x00\x30\x01\x62\x06proto3'
+  serialized_pb=b'\n\x0eshowtime.proto\"\x14\n\x04\x44\x61te\x12\x0c\n\x04\x64\x61te\x18\x01 \x01(\t\",\n\x0cShowtimeData\x12\x0c\n\x04\x64\x61te\x18\x01 \x01(\t\x12\x0e\n\x06movies\x18\x02 \x03(\t\"\x07\n\x05\x45mpty2c\n\x08Showtime\x12-\n\x10GetListShowtimes\x12\x06.Empty\x1a\r.ShowtimeData\"\x00\x30\x01\x12(\n\x0eGetTimesByDate\x12\x05.Date\x1a\r.ShowtimeData\"\x00\x62\x06proto3'
 )
 
 
+
+
+_DATE = _descriptor.Descriptor(
+  name='Date',
+  full_name='Date',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='date', full_name='Date.date', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=18,
+  serialized_end=38,
+)
 
 
 _SHOWTIMEDATA = _descriptor.Descriptor(
@@ -59,8 +91,8 @@ _SHOWTIMEDATA = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=18,
-  serialized_end=62,
+  serialized_start=40,
+  serialized_end=84,
 )
 
 
@@ -84,13 +116,21 @@ _EMPTY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=64,
-  serialized_end=71,
+  serialized_start=86,
+  serialized_end=93,
 )
 
+DESCRIPTOR.message_types_by_name['Date'] = _DATE
 DESCRIPTOR.message_types_by_name['ShowtimeData'] = _SHOWTIMEDATA
 DESCRIPTOR.message_types_by_name['Empty'] = _EMPTY
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
+
+Date = _reflection.GeneratedProtocolMessageType('Date', (_message.Message,), {
+  'DESCRIPTOR' : _DATE,
+  '__module__' : 'showtime_pb2'
+  # @@protoc_insertion_point(class_scope:Date)
+  })
+_sym_db.RegisterMessage(Date)
 
 ShowtimeData = _reflection.GeneratedProtocolMessageType('ShowtimeData', (_message.Message,), {
   'DESCRIPTOR' : _SHOWTIMEDATA,
@@ -115,8 +155,8 @@ _SHOWTIME = _descriptor.ServiceDescriptor(
   index=0,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=73,
-  serialized_end=130,
+  serialized_start=95,
+  serialized_end=194,
   methods=[
   _descriptor.MethodDescriptor(
     name='GetListShowtimes',
@@ -124,6 +164,16 @@ _SHOWTIME = _descriptor.ServiceDescriptor(
     index=0,
     containing_service=None,
     input_type=_EMPTY,
+    output_type=_SHOWTIMEDATA,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
+    name='GetTimesByDate',
+    full_name='Showtime.GetTimesByDate',
+    index=1,
+    containing_service=None,
+    input_type=_DATE,
     output_type=_SHOWTIMEDATA,
     serialized_options=None,
     create_key=_descriptor._internal_create_key,
