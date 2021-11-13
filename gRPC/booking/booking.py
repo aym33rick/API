@@ -3,6 +3,7 @@ import grpc
 from concurrent import futures
 import booking_pb2
 import booking_pb2_grpc
+from gRPC.showtime import showtime_pb2_grpc
 
 
 class BookingServicer(booking_pb2_grpc.BookingServicer):
@@ -35,6 +36,20 @@ class BookingServicer(booking_pb2_grpc.BookingServicer):
         #     stub = showtime_pb2_grpc.ShowtimeStub(channel)
         #     answer = stub.GetTimesByDate(showtime_pb2.Date(date=request.date))
         #     print(answer)
+
+        #
+        userid = request.userid
+        date = request.date
+        movieid = request.movieid
+
+        with grpc.insecure_channel('localhost:3002') as channel :
+            stub = showtime_pb2_grpc.ShowtimeStub(channel)
+            answer = stub.GetTimesByDate(showtime_pb2_grpc.Date(date = date))
+            if str(movieid) in answer.movies :
+                print("Movie compatile with timetables!")
+                for booking in self.db:
+                    print(booking)
+        #
         return booking_pb2.Empty()
 
 
