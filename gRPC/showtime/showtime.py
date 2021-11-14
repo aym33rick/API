@@ -9,15 +9,15 @@ class ShowtimeServicer(showtime_pb2_grpc.ShowtimeServicer):
         with open('{}/databases/times.json'.format("."), "r") as jsf:
             self.db = json.load(jsf)["schedule"]
 
+    # retourne la liste des reservations
     def GetListShowtimes(self, request, context) :
         for showtime in self.db:
-            print(showtime['date'], showtime['movies'])
             yield showtime_pb2.ShowtimeData(date=showtime['date'], movies=showtime['movies'])
 
+    # retourne la liste des reservations pour une date
     def GetTimesByDate(self, request, context) :
         for showtime in self.db:
             if showtime['date'] == request.date:
-                print(showtime['date'], showtime['movies'])
                 return showtime_pb2.ShowtimeData(date=showtime['date'], movies=showtime['movies'])
         return showtime_pb2.ShowtimeData(date="", movies="")
 

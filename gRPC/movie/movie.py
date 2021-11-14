@@ -46,6 +46,7 @@ class MovieServicer(movie_pb2_grpc.MovieServicer):
     def PutMovieByID(self, request, context):
         for movie in self.db:
             if movie['id'] == request.id:
+                # efface un movie pour le rajouter pour ne pas creer de doublon
                 self.db.remove(movie)
                 self.db.append(movie_pb2.MovieData(title=request.title, rating=request.rating, director=request.director,id=request.id))
                 print("Movie found and Modified!")

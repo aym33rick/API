@@ -17,11 +17,12 @@ class UserServicer(user_pb2_grpc.UserServicer):
                 print("User found!")
                 return user_pb2.user(userid=user2['id'], name=user2['name'], last_active=str(user2['last_active']))
 
+    # retourne les réservations d'une personne
     def GetBookedMoviesOfUser(self, request, context):
         with grpc.insecure_channel('localhost:3002') as channel:
+            # récuperation du lien de booking
             stub = booking_pb2_grpc.BookingStub(channel)
             bookings = stub.GetBookingByUserID(booking_pb2.BookingUserID(userid=request.userid))
-            print("Hello")
             for booking in bookings:
                 yield user_pb2.BookingUserData(userid=booking.BookingUserID,date=booking.date,movies=booking.movies)
         return 0
