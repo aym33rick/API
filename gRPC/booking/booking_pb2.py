@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\rbooking.proto\"\x1f\n\rBookingUserID\x12\x0e\n\x06userid\x18\x01 \x01(\t\"B\n\x0b\x42ookingData\x12\x15\n\rBookingUserID\x18\x01 \x01(\t\x12\x0c\n\x04\x64\x61te\x18\x02 \x01(\t\x12\x0e\n\x06movies\x18\x03 \x01(\t\"\x07\n\x05\x45mpty2\xe3\x01\n\x07\x42ooking\x12*\n\x0eGetListBooking\x12\x06.Empty\x1a\x0c.BookingData\"\x00\x30\x01\x12\x36\n\x12GetBookingByUserID\x12\x0e.BookingUserID\x1a\x0c.BookingData\"\x00\x30\x01\x12%\n\x0bPostBooking\x12\x0c.BookingData\x1a\x06.Empty\"\x00\x12$\n\nPutBooking\x12\x0c.BookingData\x1a\x06.Empty\"\x00\x12\'\n\rDeleteBooking\x12\x0c.BookingData\x1a\x06.Empty\"\x00\x62\x06proto3'
+  serialized_pb=b'\n\rbooking.proto\"\x1f\n\rBookingUserID\x12\x0e\n\x06userid\x18\x01 \x01(\t\"B\n\x0b\x42ookingData\x12\x15\n\rBookingUserID\x18\x01 \x01(\t\x12\x0c\n\x04\x64\x61te\x18\x02 \x01(\t\x12\x0e\n\x06movies\x18\x03 \x01(\t\"\x0e\n\x0c\x45mptyBooking2\xff\x01\n\x07\x42ooking\x12\x31\n\x0eGetListBooking\x12\r.EmptyBooking\x1a\x0c.BookingData\"\x00\x30\x01\x12\x36\n\x12GetBookingByUserID\x12\x0e.BookingUserID\x1a\x0c.BookingData\"\x00\x30\x01\x12,\n\x0bPostBooking\x12\x0c.BookingData\x1a\r.EmptyBooking\"\x00\x12+\n\nPutBooking\x12\x0c.BookingData\x1a\r.EmptyBooking\"\x00\x12.\n\rDeleteBooking\x12\x0c.BookingData\x1a\r.EmptyBooking\"\x00\x62\x06proto3'
 )
 
 
@@ -103,9 +103,9 @@ _BOOKINGDATA = _descriptor.Descriptor(
 )
 
 
-_EMPTY = _descriptor.Descriptor(
-  name='Empty',
-  full_name='Empty',
+_EMPTYBOOKING = _descriptor.Descriptor(
+  name='EmptyBooking',
+  full_name='EmptyBooking',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
@@ -124,12 +124,12 @@ _EMPTY = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=118,
-  serialized_end=125,
+  serialized_end=132,
 )
 
 DESCRIPTOR.message_types_by_name['BookingUserID'] = _BOOKINGUSERID
 DESCRIPTOR.message_types_by_name['BookingData'] = _BOOKINGDATA
-DESCRIPTOR.message_types_by_name['Empty'] = _EMPTY
+DESCRIPTOR.message_types_by_name['EmptyBooking'] = _EMPTYBOOKING
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 BookingUserID = _reflection.GeneratedProtocolMessageType('BookingUserID', (_message.Message,), {
@@ -146,12 +146,12 @@ BookingData = _reflection.GeneratedProtocolMessageType('BookingData', (_message.
   })
 _sym_db.RegisterMessage(BookingData)
 
-Empty = _reflection.GeneratedProtocolMessageType('Empty', (_message.Message,), {
-  'DESCRIPTOR' : _EMPTY,
+EmptyBooking = _reflection.GeneratedProtocolMessageType('EmptyBooking', (_message.Message,), {
+  'DESCRIPTOR' : _EMPTYBOOKING,
   '__module__' : 'booking_pb2'
-  # @@protoc_insertion_point(class_scope:Empty)
+  # @@protoc_insertion_point(class_scope:EmptyBooking)
   })
-_sym_db.RegisterMessage(Empty)
+_sym_db.RegisterMessage(EmptyBooking)
 
 
 
@@ -162,15 +162,15 @@ _BOOKING = _descriptor.ServiceDescriptor(
   index=0,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=128,
-  serialized_end=355,
+  serialized_start=135,
+  serialized_end=390,
   methods=[
   _descriptor.MethodDescriptor(
     name='GetListBooking',
     full_name='Booking.GetListBooking',
     index=0,
     containing_service=None,
-    input_type=_EMPTY,
+    input_type=_EMPTYBOOKING,
     output_type=_BOOKINGDATA,
     serialized_options=None,
     create_key=_descriptor._internal_create_key,
@@ -191,7 +191,7 @@ _BOOKING = _descriptor.ServiceDescriptor(
     index=2,
     containing_service=None,
     input_type=_BOOKINGDATA,
-    output_type=_EMPTY,
+    output_type=_EMPTYBOOKING,
     serialized_options=None,
     create_key=_descriptor._internal_create_key,
   ),
@@ -201,7 +201,7 @@ _BOOKING = _descriptor.ServiceDescriptor(
     index=3,
     containing_service=None,
     input_type=_BOOKINGDATA,
-    output_type=_EMPTY,
+    output_type=_EMPTYBOOKING,
     serialized_options=None,
     create_key=_descriptor._internal_create_key,
   ),
@@ -211,7 +211,7 @@ _BOOKING = _descriptor.ServiceDescriptor(
     index=4,
     containing_service=None,
     input_type=_BOOKINGDATA,
-    output_type=_EMPTY,
+    output_type=_EMPTYBOOKING,
     serialized_options=None,
     create_key=_descriptor._internal_create_key,
   ),

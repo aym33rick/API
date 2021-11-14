@@ -3,8 +3,7 @@ import grpc
 from concurrent import futures
 import booking_pb2
 import booking_pb2_grpc
-from gRPC.showtime import showtime_pb2_grpc
-
+import showtime_pb2_grpc
 
 class BookingServicer(booking_pb2_grpc.BookingServicer):
     def __init__(self):
@@ -50,7 +49,7 @@ class BookingServicer(booking_pb2_grpc.BookingServicer):
                 for booking in self.db:
                     print(booking)
         #
-        return booking_pb2.Empty()
+        return booking_pb2.EmptyBooking()
 
 
 def serve():

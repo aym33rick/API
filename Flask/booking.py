@@ -30,10 +30,14 @@ def get_booking_byid(userid):
 def create_booking(userid):
   req = request.get_json()
   for booking in bookings:
+    #verifie si booking deja existant
     if str(booking["userid"]) == str(userid):
       return make_response(jsonify({"error":"booking ID already exists"}),409)
-  bookings.append(req)
-  res = make_response(jsonify({"message":"booking added"}),200)
+    else
+      #verification si film existant ce jour là
+      if str()
+    bookings.append(req)
+    res = make_response(jsonify({"message":"booking added"}),200)
   return res
 
 if __name__ == "__main__":

@@ -1,10 +1,10 @@
 syntax = "proto3";
 service Booking {
-  rpc GetListBooking(Empty) returns (stream BookingData) {}
+  rpc GetListBooking(EmptyBooking) returns (stream BookingData) {}
   rpc GetBookingByUserID(BookingUserID) returns (stream BookingData) {}
-  rpc PostBooking(BookingData) returns (Empty) {}
-  rpc PutBooking(BookingData) returns (Empty) {}
-  rpc DeleteBooking(BookingData) returns (Empty){}
+  rpc PostBooking(BookingData) returns (EmptyBooking) {}
+  rpc PutBooking(BookingData) returns (EmptyBooking) {}
+  rpc DeleteBooking(BookingData) returns (EmptyBooking){}
 }
 message BookingUserID {
   string userid = 1;
@@ -14,7 +14,7 @@ message BookingData {
   string date = 2;
   string movies = 3;
 }
-message Empty {
+message EmptyBooking {
 }
 
 
