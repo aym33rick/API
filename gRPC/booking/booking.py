@@ -3,7 +3,7 @@ import grpc
 from concurrent import futures
 import booking_pb2
 import booking_pb2_grpc
-from gRPC.showtime import showtime_pb2_grpc
+from showtime import showtime_pb2_grpc
 
 
 class BookingServicer(booking_pb2_grpc.BookingServicer):
@@ -12,13 +12,13 @@ class BookingServicer(booking_pb2_grpc.BookingServicer):
             self.db = json.load(jsf)["bookings"]
 
     # rajouter le fait que si il n'y a pas de booking la fonction renvoie un booking vide
-    def GetListBooking(self, request, context) :
+    def GetListBooking(self, request, context):
         for booking in self.db:
             for date in booking['dates']:
                 for movie in date['movies']:
                     yield booking_pb2.BookingData(BookingUserID=booking['userid'], date=date['date'], movies=movie)
 
-    def GetBookingByUserID(self, request, context) :
+    def GetBookingByUserID(self, request, context):
         for booking in self.db:
             if booking['userid'] == request.userid:
                 print("Booking found!")
@@ -28,7 +28,7 @@ class BookingServicer(booking_pb2_grpc.BookingServicer):
             else:
                 yield booking_pb2.BookingData(BookingUserID="", date="", movies="")
 
-    def PostBooking(self, request, context) :
+    def PostBooking(self, request, context):
         print(request.BookingUserID)
         print(request.date)
         print(request.movies)
@@ -42,10 +42,10 @@ class BookingServicer(booking_pb2_grpc.BookingServicer):
         date = request.date
         movieid = request.movieid
 
-        with grpc.insecure_channel('localhost:3002') as channel :
+        with grpc.insecure_channel('localhost:3002') as channel:
             stub = showtime_pb2_grpc.ShowtimeStub(channel)
-            answer = stub.GetTimesByDate(showtime_pb2_grpc.Date(date = date))
-            if str(movieid) in answer.movies :
+            answer = stub.GetTimesByDate(showtime_pb2_grpc.Date(date=date))
+            if str(movieid) in answer.movies:
                 print("Movie compatile with timetables!")
                 for booking in self.db:
                     print(booking)
@@ -59,6 +59,7 @@ def serve():
     server.add_insecure_port('[::]:3002')
     server.start()
     server.wait_for_termination()
+
 
 if __name__ == '__main__':
     serve()
