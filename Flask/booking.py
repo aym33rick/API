@@ -27,17 +27,22 @@ def get_booking_byid(userid):
 
 #Crée un nouveau film
 @app.route("/bookings/<userid>", methods=["POST"])
-def create_booking(userid):
+def add_booking_byuser(userid):
   req = request.get_json()
   for booking in bookings:
     #verifie si booking deja existant
     if str(booking["userid"]) == str(userid):
-      return make_response(jsonify({"error":"booking ID already exists"}),409)
-    else
-      #verification si film existant ce jour là
-      if str()
-    bookings.append(req)
-    res = make_response(jsonify({"message":"booking added"}),200)
+      for date in booking['dates']:
+        if str(date['date']) == str(req.date):
+          for movie in date['movies']:
+            if str(movie) == str(req.movieid):
+              return make_response(jsonify({"error":"booking ID already exists"}),409)
+  #sinon ajoute le film
+  newBooking = {}
+  newBooking['userid'] = userid
+  newBooking['dates'] = req
+  bookings.append(newBooking)
+  res = make_response(jsonify({"message":"booking added"}),200)
   return res
 
 if __name__ == "__main__":
