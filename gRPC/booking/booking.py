@@ -3,12 +3,9 @@ import grpc
 from concurrent import futures
 import booking_pb2
 import booking_pb2_grpc
-<<<<<<< HEAD
 import showtime_pb2_grpc
-=======
-from showtime import showtime_pb2_grpc
+import showtime_pb2
 
->>>>>>> 26b740f25188853c2b0d895b7246cf62d6dc550f
 
 class BookingServicer(booking_pb2_grpc.BookingServicer):
     def __init__(self):
@@ -33,27 +30,16 @@ class BookingServicer(booking_pb2_grpc.BookingServicer):
                 yield booking_pb2.BookingData(BookingUserID="", date="", movies="")
 
     def PostBooking(self, request, context):
-        print(request.BookingUserID)
-        print(request.date)
-        print(request.movies)
-        # with grpc.insecure_channel('localhost:3003') as channel:
-        #     stub = showtime_pb2_grpc.ShowtimeStub(channel)
-        #     answer = stub.GetTimesByDate(showtime_pb2.Date(date=request.date))
-        #     print(answer)
-
-        #
-        userid = request.userid
-        date = request.date
-        movieid = request.movieid
-
-        with grpc.insecure_channel('localhost:3002') as channel:
+        film_not_find = True
+        with grpc.insecure_channel('localhost:3003') as channel:
             stub = showtime_pb2_grpc.ShowtimeStub(channel)
-            answer = stub.GetTimesByDate(showtime_pb2_grpc.Date(date=date))
-            if str(movieid) in answer.movies:
-                print("Movie compatile with timetables!")
-                for booking in self.db:
-                    print(booking)
-        #
+            answer = stub.GetTimesByDate(showtime_pb2.Date(date=request.date))
+            for movie in answer.movies:
+                if movie==request.movies:
+                    film_not_find = False
+                    self.db.append(booking_pb2.BookingData(BookingUserID=request.BookingUserID, date=request.date, movies=request.movies))
+            if film_not_find:
+                print("Le film ne passe pas à cette date la!")
         return booking_pb2.EmptyBooking()
 
 

@@ -2,7 +2,7 @@ syntax = "proto3";
 
 service User {
   rpc GetUserByID(UserId) returns (user) {}
-  rpc GetBookedMoviesOfUser(UserId) returns (stream BookingData) {}
+  rpc GetBookedMoviesOfUser(UserId) returns (stream BookingUserData) {}
 }
 
 message UserId {
@@ -15,8 +15,8 @@ message user {
   string last_active = 3;
 }
 
-message BookingData {
-  string BookingUserID = 1;
+message BookingUserData {
+  string userid = 1;
   string date = 2;
   string movies = 3;
 }

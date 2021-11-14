@@ -22,7 +22,7 @@ class UserStub(object):
         self.GetBookedMoviesOfUser = channel.unary_stream(
                 '/User/GetBookedMoviesOfUser',
                 request_serializer=user__pb2.UserId.SerializeToString,
-                response_deserializer=user__pb2.BookingData.FromString,
+                response_deserializer=user__pb2.BookingUserData.FromString,
                 )
 
 
@@ -52,7 +52,7 @@ def add_UserServicer_to_server(servicer, server):
             'GetBookedMoviesOfUser': grpc.unary_stream_rpc_method_handler(
                     servicer.GetBookedMoviesOfUser,
                     request_deserializer=user__pb2.UserId.FromString,
-                    response_serializer=user__pb2.BookingData.SerializeToString,
+                    response_serializer=user__pb2.BookingUserData.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -94,6 +94,6 @@ class User(object):
             metadata=None):
         return grpc.experimental.unary_stream(request, target, '/User/GetBookedMoviesOfUser',
             user__pb2.UserId.SerializeToString,
-            user__pb2.BookingData.FromString,
+            user__pb2.BookingUserData.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

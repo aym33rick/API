@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\nuser.proto\"\x18\n\x06UserId\x12\x0e\n\x06userid\x18\x01 \x01(\t\"9\n\x04user\x12\x0e\n\x06userid\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x13\n\x0blast_active\x18\x03 \x01(\t\"B\n\x0b\x42ookingData\x12\x15\n\rBookingUserID\x18\x01 \x01(\t\x12\x0c\n\x04\x64\x61te\x18\x02 \x01(\t\x12\x0e\n\x06movies\x18\x03 \x01(\t2[\n\x04User\x12\x1f\n\x0bGetUserByID\x12\x07.UserId\x1a\x05.user\"\x00\x12\x32\n\x15GetBookedMoviesOfUser\x12\x07.UserId\x1a\x0c.BookingData\"\x00\x30\x01\x62\x06proto3'
+  serialized_pb=b'\n\nuser.proto\"\x18\n\x06UserId\x12\x0e\n\x06userid\x18\x01 \x01(\t\"9\n\x04user\x12\x0e\n\x06userid\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x13\n\x0blast_active\x18\x03 \x01(\t\"?\n\x0f\x42ookingUserData\x12\x0e\n\x06userid\x18\x01 \x01(\t\x12\x0c\n\x04\x64\x61te\x18\x02 \x01(\t\x12\x0e\n\x06movies\x18\x03 \x01(\t2_\n\x04User\x12\x1f\n\x0bGetUserByID\x12\x07.UserId\x1a\x05.user\"\x00\x12\x36\n\x15GetBookedMoviesOfUser\x12\x07.UserId\x1a\x10.BookingUserData\"\x00\x30\x01\x62\x06proto3'
 )
 
 
@@ -103,30 +103,30 @@ _USER = _descriptor.Descriptor(
 )
 
 
-_BOOKINGDATA = _descriptor.Descriptor(
-  name='BookingData',
-  full_name='BookingData',
+_BOOKINGUSERDATA = _descriptor.Descriptor(
+  name='BookingUserData',
+  full_name='BookingUserData',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='BookingUserID', full_name='BookingData.BookingUserID', index=0,
+      name='userid', full_name='BookingUserData.userid', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='date', full_name='BookingData.date', index=1,
+      name='date', full_name='BookingUserData.date', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='movies', full_name='BookingData.movies', index=2,
+      name='movies', full_name='BookingUserData.movies', index=2,
       number=3, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -145,12 +145,12 @@ _BOOKINGDATA = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=99,
-  serialized_end=165,
+  serialized_end=162,
 )
 
 DESCRIPTOR.message_types_by_name['UserId'] = _USERID
 DESCRIPTOR.message_types_by_name['user'] = _USER
-DESCRIPTOR.message_types_by_name['BookingData'] = _BOOKINGDATA
+DESCRIPTOR.message_types_by_name['BookingUserData'] = _BOOKINGUSERDATA
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 UserId = _reflection.GeneratedProtocolMessageType('UserId', (_message.Message,), {
@@ -167,12 +167,12 @@ user = _reflection.GeneratedProtocolMessageType('user', (_message.Message,), {
   })
 _sym_db.RegisterMessage(user)
 
-BookingData = _reflection.GeneratedProtocolMessageType('BookingData', (_message.Message,), {
-  'DESCRIPTOR' : _BOOKINGDATA,
+BookingUserData = _reflection.GeneratedProtocolMessageType('BookingUserData', (_message.Message,), {
+  'DESCRIPTOR' : _BOOKINGUSERDATA,
   '__module__' : 'user_pb2'
-  # @@protoc_insertion_point(class_scope:BookingData)
+  # @@protoc_insertion_point(class_scope:BookingUserData)
   })
-_sym_db.RegisterMessage(BookingData)
+_sym_db.RegisterMessage(BookingUserData)
 
 
 
@@ -183,8 +183,8 @@ _USER = _descriptor.ServiceDescriptor(
   index=0,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=167,
-  serialized_end=258,
+  serialized_start=164,
+  serialized_end=259,
   methods=[
   _descriptor.MethodDescriptor(
     name='GetUserByID',
@@ -202,7 +202,7 @@ _USER = _descriptor.ServiceDescriptor(
     index=1,
     containing_service=None,
     input_type=_USERID,
-    output_type=_BOOKINGDATA,
+    output_type=_BOOKINGUSERDATA,
     serialized_options=None,
     create_key=_descriptor._internal_create_key,
   ),
