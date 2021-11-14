@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+service User {
+  rpc GetUserByID(UserId) returns (user) {}
+  rpc GetBookedMoviesOfUser(UserId) returns (stream BookingData) {}
+}
+
+message UserId {
+  string userid = 1;
+}
+
+message user {
+  string userid = 1;
+  string name = 2;
+  string last_active = 3;
+}
+
+message BookingData {
+  string BookingUserID = 1;
+  string date = 2;
+  string movies = 3;
+}
