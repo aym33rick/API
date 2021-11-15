@@ -22,10 +22,10 @@ def get_movie_byid(movieid):
   for movie in movies:
     if str(movie["id"]) == str(movieid):
       #avec ou sans le http://127.0.0.1:5000???
-      movie["links"] = {"GET": {"href": "http://127.0.0.1:5000/movies/" + movie["id"]},
-                        "PUT": {"href": "http://127.0.0.1:5000/movies/" + movie["id"]},
-                        "POST": {"href": "http://127.0.0.1:5000/movies/" + movie["id"]},
-                        "DELETE": {"href": "http://127.0.0.1:5000/movies/" + movie["id"]}}
+      movie["links"] = {"GET": {"href": "http://127.0.0.1:5001/movies/" + movie["id"]},
+                        "PUT": {"href": "http://127.0.0.1:5001/movies/" + movie["id"]},
+                        "POST": {"href": "http://127.0.0.1:5001/movies/" + movie["id"]},
+                        "DELETE": {"href": "http://127.0.0.1:5001/movies/" + movie["id"]}}
       res = make_response(jsonify(movie),200)
       return res
   return make_response(jsonify({"error":"Movie ID not found"}),400)
@@ -37,11 +37,11 @@ def get_movie_bytitle(title):
   for movie in movies:
     if str(movie["title"]) == str(title):
       # avec ou sans le http://127.0.0.1:5000???
-      movie["links"] = {"GET": {"href": "http://127.0.0.1:5000/movies/" + movie["id"]},
-                        "GET": {"href": "http://127.0.0.1:5000/movietitle/" + movie["title"]},
-                        "PUT": {"href": "http://127.0.0.1:5000/movies/" + movie["id"]},
-                        "POST": {"href": "http://127.0.0.1:5000/movies/" + movie["id"]},
-                        "DELETE": {"href": "http://127.0.0.1:5000/movies/" + movie["id"]}}
+      movie["links"] = {"GET": {"href": "http://127.0.0.1:5001/movies/" + movie["id"]},
+                        "GET": {"href": "http://127.0.0.1:5001/movietitle/" + movie["title"]},
+                        "PUT": {"href": "http://127.0.0.1:5001/movies/" + movie["id"]},
+                        "POST": {"href": "http://127.0.0.1:5001/movies/" + movie["id"]},
+                        "DELETE": {"href": "http://127.0.0.1:5001/movies/" + movie["id"]}}
       res = make_response(jsonify(movie), 200)
       return res
   return make_response(jsonify({"error": "Movie title not found"}), 400)
@@ -55,10 +55,10 @@ def create_movie(movieid):
       return make_response(jsonify({"error":"movie ID already exists"}),409)
   movies.append(req)
   res = make_response(jsonify({"message":"movie added"},req,{
-            "GET": {"href": "http://127.0.0.1:5000/movies/" + movieid},
-            "PUT": {"href": "http://127.0.0.1:5000/movies/" + movieid},
-            "POST": {"href": "http://127.0.0.1:5000/movies/" + movieid},
-            "DELETE": {"href": "http://127.0.0.1:5000/movies/" + movieid}}),200)
+            "GET": {"href": "http://127.0.0.1:5001/movies/" + movieid},
+            "PUT": {"href": "http://127.0.0.1:5001/movies/" + movieid},
+            "POST": {"href": "http://127.0.0.1:5001/movies/" + movieid},
+            "DELETE": {"href": "http://127.0.0.1:5001/movies/" + movieid}}),200)
   return res
 
 #Modifie un film
@@ -68,10 +68,10 @@ def update_movie(movieid):
     if str(movie["id"]) == str(movieid):
       movie = request.get_json()
       res = make_response(jsonify({"message":"movie modified"},request.get_json(),{
-        "GET": {"href": "http://127.0.0.1:5000/movies/" + movie["id"]},
-        "PUT": {"href": "http://127.0.0.1:5000/movies/" + movie["id"]},
-        "POST": {"href": "http://127.0.0.1:5000/movies/" + movie["id"]},
-        "DELETE": {"href": "http://127.0.0.1:5000/movies/" + movie["id"]}}),200)
+        "GET": {"href": "http://127.0.0.1:5001/movies/" + movie["id"]},
+        "PUT": {"href": "http://127.0.0.1:5001/movies/" + movie["id"]},
+        "POST": {"href": "http://127.0.0.1:5001/movies/" + movie["id"]},
+        "DELETE": {"href": "http://127.0.0.1:5001/movies/" + movie["id"]}}),200)
       return res
   res = make_response(jsonify({"error":"movie ID not found"}),201)
   return res
@@ -82,10 +82,10 @@ def del_movie(movieid):
   for movie in movies:
     if str(movie["id"]) == str(movieid):
       movies.remove(movie)
-      return make_response(jsonify({"message":"movie deleted"},{"POST": {"href": "http://127.0.0.1:5000/movies/"}}),200)
+      return make_response(jsonify({"message":"movie deleted"},{"POST": {"href": "http://127.0.0.1:5001/movies/"}}),200)
   res = make_response(jsonify({"error":"movie ID not found"}),400)
   return res
 
 
 if __name__ == "__main__":
-  app.run()
+  app.run(port=5001)

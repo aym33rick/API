@@ -1,5 +1,6 @@
 from flask import Flask, make_response, jsonify, render_template, request
 import json
+from requests import get
 
 app = Flask(__name__)
 
@@ -34,20 +35,22 @@ def get_user_byid(userid):
 #Renvoie les films réservé par cet utilisateur
 @app.route("/user/bookings/<userid>", methods=['GET'])
 def get_booked_movies_of_user(userid):
-  for booking in bookings:
-    if str(booking["userid"]) == str(userid):
-      bookingTableau = {}
-      bookingTableau['userid'] = userid
-      bookingTableau['dates'] = []
-      for date in booking["dates"]:
-        dateTableau = {}
-        dateTableau['date'] = date['date']
-        for movie in movies:
-          if str(movie['id']) == str(date['movies'][0]):
-            #ajouter les infos du movie dans le booking
-            dateTableau['movies'] = movie
-        bookingTableau['dates'].append(dateTableau)
-      return make_response(jsonify(bookingTableau), 200)
+  #recuperation dans le service booking des films de cet user
+  res = get("http://localhost:5002/bookings/" + userid)
+  bookingTableau = {}
+  if res.status_code == 200:
+    bookingTableau['userid'] = userid
+    bookingTableau['dates'] = []
+    for date in res.json()['dates']:
+      dateTableau = {}
+      dateTableau['date'] = date['date']
+      dateTableau['movies'] = []
+      for movie in date['movies']:
+        # recuperation dans le service movie les films avec cet movie id
+        resMovie = get("http://localhost:5001/movies/" + movie)
+        dateTableau['movies'].append(resMovie.json())
+      bookingTableau['dates'].append(dateTableau)
+    return make_response(jsonify(bookingTableau), 200)
   return make_response(jsonify({"error":"booking ID not found"}),400)
 
 if __name__ == "__main__":

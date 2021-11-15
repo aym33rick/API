@@ -23,7 +23,7 @@ def get_booking_byid(userid):
     if str(booking["userid"]) == str(userid):
       res = make_response(jsonify(booking),200)
       return res
-    return make_response(jsonify({"error":"booking ID not found"}),400)
+  return make_response(jsonify({"error":"booking ID not found"}),400)
 
 #Crée un nouveau film
 @app.route("/bookings/<userid>", methods=["POST"])
@@ -46,4 +46,4 @@ def add_booking_byuser(userid):
   return res
 
 if __name__ == "__main__":
-  app.run()
+  app.run(port=5002)
