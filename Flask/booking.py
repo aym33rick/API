@@ -1,5 +1,6 @@
 from flask import Flask, make_response, jsonify, render_template, request
 import json
+from requests import get
 
 app = Flask(__name__)
 
@@ -33,17 +34,23 @@ def add_booking_byuser(userid):
     #verifie si booking deja existant
     if str(booking["userid"]) == str(userid):
       for date in booking['dates']:
-        if str(date['date']) == str(req.date):
+        if str(date['date']) == str(req['date']):
           for movie in date['movies']:
-            if str(movie) == str(req.movieid):
+            if str(movie) == str(req['movieid']):
               return make_response(jsonify({"error":"booking ID already exists"}),409)
-  #sinon ajoute le film
-  newBooking = {}
-  newBooking['userid'] = userid
-  newBooking['dates'] = req
-  bookings.append(newBooking)
-  res = make_response(jsonify({"message":"booking added"}),200)
-  return res
+  #verification film existant dans le service showtimes
+  resShowtime = get("http://localhost:5003/showmovies/" + str(req['date']))
+  print(resShowtime.status_code)
+  if resShowtime.status_code == 200:
+    newBooking = {}
+    # ajoute le film
+    newBooking['userid'] = userid
+    newBooking['dates'] = req
+    bookings.append(newBooking)
+    res = make_response(jsonify({"message":"booking added"}),200)
+    return res
+  else:
+    return make_response(jsonify({"error": "movie not found"}), 408)
 
 if __name__ == "__main__":
   app.run(port=5002)

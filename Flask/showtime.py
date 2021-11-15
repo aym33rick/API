@@ -21,11 +21,10 @@ def json():
 def get_times_bydate(date):
   for time in times:
     if str(time["date"]) == str(date):
-      #avec ou sans le http://127.0.0.1:5000???
       #movie["links"] = {"self": {"href": "http://127.0.0.1:5000/movies/" + movie["id"]}, "modify": {"href": "http://127.0.0.1:5000/movies/" + movie["id"]},"delete": {"href": "http://127.0.0.1:5000/movies/" + movie["id"]}}
       res = make_response(jsonify(time),200)
       return res
-    return make_response(jsonify({"error":"Movie ID not found"}),400)
+  return make_response(jsonify({"error":"Movie ID not found"}),400)
 
 if __name__ == "__main__":
-  app.run()
+  app.run(port=5003)
